@@ -6,6 +6,13 @@ lspconfig.rust_analyzer.setup {
   capabilities = nvlsp.capabilities,
   filetypes = { "rust" },
   root_dir = lspconfig.util.root_pattern "Cargo.toml",
+  settings = {
+    ["rust-analyzer"] = {
+      cargo = {
+        allFeatures = true,
+      },
+    },
+  },
 }
 
 lspconfig.pyright.setup {
@@ -15,6 +22,8 @@ lspconfig.pyright.setup {
   settings = {
     pyright = {
       disableOrganizeImports = true,
+      autoSearchPaths = true,
+      typeCheckingMode = "off",
     },
   },
 }
@@ -25,7 +34,7 @@ lspconfig.ruff.setup {
   filetypes = { "python" },
 }
 
-local servers_for_nextjs = { "ts_ls", "tailwindcss", "eslint" }
+local servers_for_nextjs = { "ts_ls", "tailwindcss", "eslint", "emmet_language_server" }
 
 for _, lsp in ipairs(servers_for_nextjs) do
   lspconfig[lsp].setup {
